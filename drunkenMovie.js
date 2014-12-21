@@ -1,7 +1,9 @@
 //version number & changes
-var drunkenMovieVersion = 0.6
-var myTitle = document.querySelector("title");
+var drunkenMovieVersion = 0.6,
+    myTitle = document.querySelector("title");
+    
 myTitle.innerHTML += (" " + drunkenMovieVersion);
+
 /*
 0.2 = roughly working, still needs gui fixes for user interactivity
 0.3 = error handling and represenation works
@@ -12,23 +14,20 @@ myTitle.innerHTML += (" " + drunkenMovieVersion);
 */
 
 //grab the input and output HTML into JS
-var movieInputBox = document.querySelector("#movieInputBox");
-var addButton = document.querySelector("#add");
-
-var pickButton = document.querySelector("#picker");
-var addButton = document.querySelector("#add");
-
-//grab various other HTML elements
-var movieList = document.querySelector("ul");
-var chosenMovie = document.querySelector("#chosenMovie");
-var error = document.querySelector("#error");
-var h3 = document.querySelector("h3");
-var reset = document.querySelector("#reset");
+var movieInputBox = document.querySelector("#movieInputBox"),
+    pickButton = document.querySelector("#picker"),
+    addButton = document.querySelector("#add"),
+    //grab various other HTML elements
+    movieList = document.querySelector("ul"),
+    chosenMovie = document.querySelector("#chosenMovie"),
+    error = document.querySelector("#error"),
+    h3 = document.querySelector("h3"),
+    reset = document.querySelector("#reset");
 
 //initialize the movieArray so it can be appended later
-var movieArray = [];
-var newlyAddedMovie = undefined;
-var randomMovieNumber = undefined;
+var movieArray = [],
+    newlyAddedMovie,
+    randomMovieNumber;
 
 //makes HTML lists with function(args) as the content
 function addToList() {
@@ -37,18 +36,18 @@ function addToList() {
   result += args.join("</li><li>");
   result += "</li>"; // end list
   return result;
-};
+}
 
 //function to choose a movie from the movieArray at random
 function pickMovie() {
   if (movieArray.length === 0) {
     renderError(true);
   } else {
-    randomMovieNumber = Math.floor(Math.random() * movieArray.length)
+    randomMovieNumber = Math.floor(Math.random() * movieArray.length);
     chosenMovie.innerHTML = movieArray[randomMovieNumber];
     displayChosenMovie();
   }
-};
+}
 
 //event listeners for user interaction
 pickButton.addEventListener("click", pickHandler, false);
@@ -62,28 +61,29 @@ function addKeyHandler(event) {
   if (event.keyCode === 13) {
     checkInput();
   }
-};
+}
 
 function errorClick() {
   renderError(false);
-};
+}
 
 function addHandler() {
   checkInput();
-};
+}
+
 function pickHandler() {
   pickMovie();
-};
+}
 
 function checkInput() {
   // check the user's input for blanks and doubles
   newlyAddedMovie = movieInputBox.value.toString();
-  if (newlyAddedMovie === "" || newlyAddedMovie === String(movieArray[0])) {
+  if (newlyAddedMovie === "" || movieArray.indexOf(newlyAddedMovie) > -1) {
     renderError(true);
   } else {
     addMovie();
   }
-};
+}
 
 //accepts boolean values as arguments. default is false
 function renderError(thereIsAnError) {
@@ -96,7 +96,7 @@ function renderError(thereIsAnError) {
     error.style.opacity = "0";
     error.style.height = "auto";
   }
-};
+}
 
 function addMovie() {
   if (error.style.opacity === "1") {
@@ -110,7 +110,7 @@ function addMovie() {
   }
   movieArray.unshift(newlyAddedMovie);
   makeList();
-};
+}
 
 function makeList() {
   //simple way
@@ -123,11 +123,11 @@ function makeList() {
 
 function displayChosenMovie() {
   chosenMovie.style.opacity = "1";
-};
+}
 
 function resetEverything() {
   renderError(false);
   movieArray = [];
   movieList.innerHTML = "";
   h3.innerHTML = "No movies in your list... :(";
-};
+}
