@@ -1,6 +1,8 @@
 drunken-movie-machine
 =====================
 
+[![Join the chat at https://gitter.im/saltymouse/drunken-movie-machine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/saltymouse/drunken-movie-machine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Helps you decide which movie to watch from a list of your making
 
 ## Version History
